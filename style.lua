@@ -1,5 +1,5 @@
 -- Customize output to the terminal using ANSI escape sequences
--- Written by William-Riebel 13.6.2024
+-- Written by William-Riebel June 2024
 function create_style(foreground_color, background_color, is_bold, is_italic, is_underlined, is_double_underlined, is_inverse, is_struck) -- A function for convenience when creating style tables (names everything correctly).
     return {fg = foreground_color, bg = background_color, bold = is_bold, italic = is_italic, underline = is_underlined, double_underline = is_double_underlined, inverse = is_inverse, struck = is_struck}
 end
@@ -122,4 +122,14 @@ end
 
 function print_style(string, style) -- Just saves time if you want to print with styling
     print(convert_style(string, style))
+end
+
+function remove_style(string)
+    local a = string.find(string.reverse(string), "\27")
+    string = string.sub(string, 1, -(a +1))
+    local b = string.find(string.reverse(string), "\27")
+    string = string.sub(string, string.len(string) -b+1, -1)
+    local c = string.find(string, "m")
+    string = string.sub(string, c + 1, -1)
+    return string
 end
