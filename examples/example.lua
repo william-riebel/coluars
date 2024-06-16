@@ -1,7 +1,7 @@
 -- An example script to show off the functions of this module.
 -- To use this module, copy the required files to your project folder and include them in your code with "require".
 -- Like this:
-require("style")
+require("coluars")
 
 -- Now you are ready to use the functions that this module provides.
 
