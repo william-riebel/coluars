@@ -20,6 +20,7 @@ example_style = {
     underline = false,         -- Underlined or not        (boolian)
     double_underline = false,  -- Double underlined or not (boolian)
     struck = false,
+    overline = false,
     inverse = false
     }
 
@@ -57,24 +58,26 @@ example_style = {
 -- For greater convenience when making style tables you can use the "create_style" function.
 -- It is not necessary to use this function when creating a style table, it is just convenient since it names all the variables contained in the style table correctly.
 
-second_example_style = create_style("red", "default", false, false, true, false, true, false)
---                                    |        |        |      |      |     |      |     |
---                                    |        |        |      |      |     |      |     |
---                    [foreground color]       |        |      |      |     |      |     |
---                                             |        |      |      |     |      |     |
---                             [background color]       |      |      |     |      |     |
---                                                      |      |      |     |      |     |
---                                                  [bold]     |      |     |      |     |
---                                                             |      |     |      |     |
---                                                       [italic]     |     |      |     |
---                                                                    |     |      |     |
---                                                           [underline]    |      |     |
---                                                                          |      |     |
---                                                          [double underline]     |     |
---                                                                                 |     |
---                                                                          [inverse]    |
---                                                                                       |
---                                                                         [strike through]
+second_example_style = create_style("red", "default", false, false, true, false, true, false, false)
+--                                    |        |        |      |      |     |      |     |      |
+--                                    |        |        |      |      |     |      |     |      |
+--                    [foreground color]       |        |      |      |     |      |     |      |
+--                                             |        |      |      |     |      |     |      |
+--                             [background color]       |      |      |     |      |     |      |
+--                                                      |      |      |     |      |     |      |
+--                                                  [bold]     |      |     |      |     |      |
+--                                                             |      |     |      |     |      |
+--                                                       [italic]     |     |      |     |      |
+--                                                                    |     |      |     |      |
+--                                                           [underline]    |      |     |      |
+--                                                                          |      |     |      |
+--                                                          [double underline]     |     |      |
+--                                                                                 |     |      |
+--                                                                          [inverse]    |      |
+--                                                                                       |      |
+--                                                                               [overline]     |
+--                                                                                              |
+--                                                                                       [inverse]
 
 
 -- Now that you know how to make correct style tables, let us use those tables to make some colored text.
