@@ -1,7 +1,7 @@
 -- Customize output to the terminal using ANSI escape sequences
 -- Written by William-Riebel June 2024
-function create_style(foreground_color, background_color, is_bold, is_italic, is_underlined, is_double_underlined, is_inverse, is_struck) -- A function for convenience when creating style tables (names everything correctly).
-    return {fg = foreground_color, bg = background_color, bold = is_bold, italic = is_italic, underline = is_underlined, double_underline = is_double_underlined, inverse = is_inverse, struck = is_struck}
+function create_style(foreground_color, background_color, is_bold, is_italic, is_underlined, is_double_underlined, is_inverse, is_overlined, is_struck) -- A function for convenience when creating style tables (names everything correctly).
+    return {fg = foreground_color, bg = background_color, bold = is_bold, italic = is_italic, underline = is_underlined, double_underline = is_double_underlined, inverse = is_inverse, overline = is_overlined, struck = is_struck}
 end
 
 
@@ -109,6 +109,9 @@ function convert_style(string, style) -- Adds ANSI control codes to a string to 
     end
     if (style["double_underline"]) then -- double underlined text
         formatstring = formatstring .. "\27[21m"
+    end
+    if (style["overline"]) then -- double underlined text
+        formatstring = formatstring .. "\27[53m"
     end
     if (style["struck"]) then -- struck through text
         formatstring = formatstring .. "\27[9m"
