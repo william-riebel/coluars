@@ -117,7 +117,7 @@ end
 
 
 function print_style(string, style) -- Just saves time if you want to print with styling
-    print(convert_style(string, style))
+    io.write(convert_style(string, style))
 end
 
 
@@ -129,4 +129,9 @@ function remove_style(string)
     local c = string.find(string, "m")
     string = string.sub(string, c + 1, -1)
     return string
+end
+
+
+function reset_terminal()
+    io.write("\27[0m")
 end
