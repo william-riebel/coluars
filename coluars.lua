@@ -1,9 +1,5 @@
 -- Customize output to the terminal using ANSI escape sequences
 -- Written by William-Riebel June 2024
-function create_style(foreground_color, background_color, is_bold, is_italic, is_underlined, is_double_underlined, is_inverse, is_overlined, is_struck) -- A function for convenience when creating style tables (names everything correctly).
-    return {fg = foreground_color, bg = background_color, bold = is_bold, italic = is_italic, underline = is_underlined, double_underline = is_double_underlined, inverse = is_inverse, overline = is_overlined, struck = is_struck}
-end
-
 
 function convert_style(string, style) -- Adds ANSI control codes to a string to make it appear like defined in the style table
     local fgstring, bgstring = "", ""
@@ -12,7 +8,7 @@ function convert_style(string, style) -- Adds ANSI control codes to a string to 
 
     -- ANSI control codes to customize the text color
         -- color codes preconfigured in the terminal
-    if (style["fg"] == "default") then
+    if (style["fg"] == "default" or style["fg"] == nil or style["fg"] == "") then
         fgstring = "\27[39m"
     elseif (style["fg"] == "black") then
         fgstring = "\27[30m"
@@ -46,15 +42,14 @@ function convert_style(string, style) -- Adds ANSI control codes to a string to 
         fgstring = "\27[96m"
     elseif (style["fg"] == "bright_white") then
         fgstring = "\27[97m"
-    else
-        -- when the user inputs a custom color (3 numbers 0-255)
+    elseif (type(style["fg"]) == "table") then -- when the user inputs a custom color code (table containing 3 numbers 0-255)
         fgstring = string.format("\27[38;2;%s;%s;%sm", style["fg"][1], style["fg"][2], style["fg"][3])
     end
 
 
     -- ANSI control codes to customize the background color
         -- color codes preconfigured in the terminal
-    if (style["bg"] == "default") then
+    if (style["bg"] == "default" or style["bg"] == nil or style["bg"] == "") then
         bgstring = "\27[49m"
     elseif (style["bg"] == "black") then
         bgstring = "\27[40m"
@@ -88,8 +83,7 @@ function convert_style(string, style) -- Adds ANSI control codes to a string to 
         bgstring = "\27[106m"
     elseif (style["bg"] == "bright_white") then
         bgstring = "\27[107m"
-    else
-        -- when the user inputs a custom color (3 numbers 0-255)
+    elseif (type(style["bg"]) == "table") then -- when the user inputs a custom color code (table containing 3 numbers 0-255)
         bgstring = string.format("\27[48;2;%s;%s;%sm", style["bg"][1], style["bg"][2], style["bg"][3])
     end
 

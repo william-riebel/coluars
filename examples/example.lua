@@ -58,7 +58,7 @@ example_style = {
 -- For greater convenience when making style tables you can use the "create_style" function.
 -- It is not necessary to use this function when creating a style table, it is just convenient since it names all the variables contained in the style table correctly.
 
-second_example_style = create_style("red", "default", false, false, true, false, true, false, false)
+--second_example_style = create_style("red", "default", false, false, true, false, true, false, false)
 --                                    |        |        |      |      |     |      |     |      |
 --                                    |        |        |      |      |     |      |     |      |
 --                    [foreground color]       |        |      |      |     |      |     |      |
@@ -101,4 +101,4 @@ print_style("I am lazy", example_style)
 -- For example, you can mix different styles in a single string since the convert style function is implemented in a way, where it just adds some special characters at the beginning and end of a string.
 -- Just look at the output of this:
 
-print("Just some regular text with an " .. convert_style("important", second_example_style) .. " word.\27[")
+print("Just some regular text with an " .. convert_style("important", exam) .. " word.\27[")
