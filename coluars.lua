@@ -104,11 +104,14 @@ function convert_style(string, style) -- Adds ANSI control codes to a string to 
     if (style["double_underline"]) then -- double underlined text
         formatstring = formatstring .. "\27[21m"
     end
-    if (style["overline"]) then -- double underlined text
+    if (style["overline"]) then -- overlined text
         formatstring = formatstring .. "\27[53m"
     end
     if (style["struck"]) then -- struck through text
         formatstring = formatstring .. "\27[9m"
+    end
+    if (style["blink"]) then -- blinking text
+        formatstring = formatstring .. "\27[5m"
     end
     
 
