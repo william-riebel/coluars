@@ -140,7 +140,7 @@ function reset_terminal() -- This just prints the ANSI escape sequence to reset 
 end
 
 
-function move_cursor(delta_x, delta_y)
+function move_cursor(delta_x, delta_y) -- Moves the cursor relative to its current position. If the cursor is already at the edge of the screen this does not move it outside
     for i = 1, math.abs(delta_x) do
         if (delta_x < 0) then
             io.write("\27[D")
@@ -158,7 +158,7 @@ function move_cursor(delta_x, delta_y)
 end
 
 
-function clear_screen(arg)
+function clear_screen(arg) -- Clears the screen up realitve to the cursor, down relative to the cursor or the entire screen
     if (arg == nil or arg == "all") then
         io.write("\27[2J")
     elseif (arg == "up") then
