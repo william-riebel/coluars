@@ -1,3 +1,5 @@
+-- WARNING: The examples shown here are out of date
+
 -- An example script to show off the functions of this module.
 -- To use this module, copy the required files to your project folder and include them in your code with "require".
 -- Like this:
