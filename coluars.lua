@@ -116,12 +116,12 @@ function convert_style(string, style) -- Adds ANSI control codes to a string to 
 end
 
 
-function print_style(string, style) -- Just saves time if you want to print with styling
+function write_style(string, style) -- Just saves time if you want to print with styling
     io.write(convert_style(string, style))
 end
 
 
-function remove_style(string)
+function remove_style(string) -- This function removes the ANSI escape sequences added to a string by this module and returns the string. This will break if you add your own ANSI escape sequences to the string without using this module or if you input multiple concatinated, styled strings.
     local a = string.find(string.reverse(string), "\27")
     string = string.sub(string, 1, -(a +1))
     local b = string.find(string.reverse(string), "\27")
@@ -132,6 +132,6 @@ function remove_style(string)
 end
 
 
-function reset_terminal()
+function reset_terminal() -- This just prints the ANSI escape sequence to reset the current treminal instance. I reccomend using it at every exit point of your program. Currently this is not neccessary, since this module does not include functionality that may break out of a string.
     io.write("\27[0m")
 end
