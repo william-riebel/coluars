@@ -112,7 +112,6 @@ function convert_style(string, style) -- Adds ANSI control codes to a string to 
     end
     
 
-
     return string.format(fgstring .. bgstring .. formatstring .."%s\27[0m", string)
 end
 
@@ -120,6 +119,7 @@ end
 function print_style(string, style) -- Just saves time if you want to print with styling
     print(convert_style(string, style))
 end
+
 
 function remove_style(string)
     local a = string.find(string.reverse(string), "\27")
