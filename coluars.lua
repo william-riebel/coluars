@@ -156,3 +156,14 @@ function move_cursor(delta_x, delta_y)
         end
     end
 end
+
+
+function clear_screen(arg)
+    if (arg == nil or arg == "all") then
+        io.write("\27[2J")
+    elseif (arg == "up") then
+        io.write("\27[1J")
+    elseif (arg == "down") then
+        io.write("\27[0J")
+    end
+end
