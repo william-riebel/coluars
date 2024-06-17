@@ -125,12 +125,12 @@ end
 
 
 function remove_style(string) -- This function removes the ANSI escape sequences added to a string by this module and returns the string. This will break if you add your own ANSI escape sequences to the string without using this module or if you input multiple concatinated, styled strings.
-    local a = string.find(string.reverse(string), "\27")
-    string = string.sub(string, 1, -(a +1))
-    local b = string.find(string.reverse(string), "\27")
-    string = string.sub(string, string.len(string) -b+1, -1)
-    local c = string.find(string, "m")
-    string = string.sub(string, c + 1, -1)
+    local index = string.find(string.reverse(string), "\27")
+    string = string.sub(string, 1, -(index +1))
+    index = string.find(string.reverse(string), "\27")
+    string = string.sub(string, string.len(string) -index+1, -1)
+    index = string.find(string, "m")
+    string = string.sub(string, index + 1, -1)
     return string
 end
 
@@ -141,20 +141,18 @@ end
 
 
 function move_cursor(delta_x, delta_y) -- Moves the cursor relative to its current position. If the cursor is already at the edge of the screen this does not move it outside
-    for i = 1, math.abs(delta_x) do
-        if (delta_x < 0) then
-            io.write("\27[D")
-        elseif (delta_x > 0) then
-            io.write("\27[C")
-        end
+    local move_code = ""
+    if (delta_x < 0) then
+        move_code = move_code .. string.format("\27[%sD", math.abs(delta_x))
+    elseif (delta_x > 0) then
+        move_code = move_code .. string.format("\27[%sC", delta_x)
     end
-    for i = 1, math.abs(delta_y) do
-        if (delta_y < 0) then
-            io.write("\27[A")
-        elseif (delta_y > 0) then
-            io.write("\27[B")
-        end
+    if (delta_y < 0) then
+        move_code = move_code .. string.format("\27[%sA", math.abs(delta_y))
+    elseif (delta_y > 0) then
+        move_code = move_code .. string.format("\27[%sB", delta_y)
     end
+    io.write(move_code)
 end
 
 
