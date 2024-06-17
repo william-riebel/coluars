@@ -138,3 +138,21 @@ end
 function reset_terminal() -- This just prints the ANSI escape sequence to reset the current treminal instance. I reccomend using it at every exit point of your program. Currently this is not neccessary, since this module does not include functionality that may break out of a string.
     io.write("\27[0m")
 end
+
+
+function move_cursor(delta_x, delta_y)
+    for i = 1, math.abs(delta_x) do
+        if (delta_x < 0) then
+            io.write("\27[D")
+        elseif (delta_x > 0) then
+            io.write("\27[C")
+        end
+    end
+    for i = 1, math.abs(delta_y) do
+        if (delta_y < 0) then
+            io.write("\27[A")
+        elseif (delta_y > 0) then
+            io.write("\27[B")
+        end
+    end
+end
