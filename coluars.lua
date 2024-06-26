@@ -135,7 +135,7 @@ function remove_style(string) -- This function removes the ANSI escape sequences
 end
 
 
-function reset_terminal() -- This just prints the ANSI escape sequence to reset the current treminal instance. I reccomend using it at every exit point of your program. Currently this is not neccessary, since this module does not include functionality that may break out of a string.
+function reset_style() -- This just prints the ANSI escape sequence to reset the current treminal instance. I reccomend using it at every exit point of your program. Currently this is not neccessary, since this module does not include functionality that may break out of a string.
     io.write("\27[0m")
 end
 
@@ -156,6 +156,22 @@ function move_cursor(delta_x, delta_y) -- Moves the cursor relative to its curre
 end
 
 
+function set_cursor(x, y)
+    io.write(string.format("\27[%s;%sH", y, x))
+end
+
+
+function scroll(lines)
+    local string = ""
+    if lines < 0 then
+        string = string.format("\27[%sS", (lines * -1))
+    elseif lines > 0 then
+        string = string.format("\27[%sS", lines)
+    end
+    io.write(string)
+end
+
+
 function clear_screen(arg) -- Clears the screen up realitve to the cursor, down relative to the cursor or the entire screen
     if (arg == nil or arg == "all") then
         io.write("\27[2J")
@@ -163,5 +179,16 @@ function clear_screen(arg) -- Clears the screen up realitve to the cursor, down 
         io.write("\27[1J")
     elseif (arg == "down") then
         io.write("\27[0J")
+    end
+end
+
+
+function clear_line(arg)
+    if (arg == nil or arg == "all") then
+        io.write("\27[2K")
+    elseif (arg == "left") then
+        io.write("\27[1K")
+    elseif (arg == "right") then
+        io.write("\27[0K")
     end
 end
